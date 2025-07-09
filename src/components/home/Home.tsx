@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 
   const memoizedHomePageData = useMemo(() => homePageData, [homePageData]);
 
-  const { home } = memoizedHomePageData.sections[0];
+  const { home } = memoizedHomePageData?.sections?.[0] || {};
 
   const styleAlternateWords = (text: string) => {
     return text
@@ -33,28 +33,28 @@ const Home: React.FC = () => {
   return (
     <div className="home-page">
       <div className="hero-section">
-        {home.hero_section?.banner?.url && (
+        {home?.hero_section?.banner?.url && (
           <div className="hero-banner">
             <img
-              {...home.hero_section.banner.$.url}
-              src={home.hero_section.banner.url}
+              {...home?.hero_section?.banner?.$?.url}
+              src={home?.hero_section?.banner?.url}
               alt="Hero Banner"
             />
           </div>
         )}
         <div className="hero-content">
-          <h1 {...home.hero_section?.$.heading}>
-            {styleAlternateWords(home.hero_section?.heading || "")}
+          <h1 {...home?.hero_section?.$?.heading}>
+            {styleAlternateWords(home?.hero_section?.heading || "")}
           </h1>
-          <p {...home.hero_section?.$.description}>
-            {home.hero_section?.description}
+          <p {...home?.hero_section?.$?.description}>
+            {home?.hero_section?.description}
           </p>
           <Button
-            {...home.hero_section?.$.primary_cta}
+            {...home?.hero_section?.$?.primary_cta}
             size="large"
             className="cta-button"
             onClick={() => {
-              navigate(home.hero_section?.primary_cta ?? "");
+              navigate(home?.hero_section?.primary_cta ?? "");
             }}
           >
             View Our Menu

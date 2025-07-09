@@ -5,24 +5,24 @@ const MenuCard: React.FC<{ data: TDishes[] }> = ({ data }) => {
   return (
     <div className="menu-card">
       {data ? (
-        data.map((menuItem: TDishes) => (
-          <div className="menu-card-item">
+        data.map((menuItem: TDishes, index: number) => (
+          <div className="menu-card-item" key={`menu-item-${index}`}>
             <div
-              {...menuItem.image.$.url}
+              {...menuItem?.image?.$?.url}
               style={{
-                background: `url(${menuItem.image.url}) lightgray 50% / cover no-repeat`,
+                background: `url(${menuItem?.image?.url}) lightgray 50% / cover no-repeat`,
                 height: "320px",
                 alignSelf: "stretch",
               }}
             ></div>
             <div className="item-content">
               <div className="item-content-text">
-                <span {...menuItem.$.price} className="price">
-                  ${menuItem.price}
+                <span {...menuItem?.$?.price} className="price">
+                  ${menuItem?.price}
                 </span>
-                <p {...menuItem.$.title}>{menuItem.title}</p>
-                <span {...menuItem.$.description} className="description">
-                  {menuItem.description}
+                <p {...menuItem?.$?.title}>{menuItem?.title}</p>
+                <span {...menuItem?.$?.description} className="description">
+                  {menuItem?.description}
                 </span>
               </div>
               <hr

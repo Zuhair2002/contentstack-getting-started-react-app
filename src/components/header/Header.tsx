@@ -6,7 +6,7 @@ import { TLink } from "../../types";
 
 const Header: React.FC = () => {
   const headerData = useSelector((state: RootState) => state.main.headerData);
-  const { logo, navigation_links } = headerData;
+  const { logo, navigation_links } = headerData || {};
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,19 +18,19 @@ const Header: React.FC = () => {
     <div className={`header ${isOpen ? "open" : ""}`}>
       <div className="logo-menu">
         <Link to="/">
-          <img {...logo.$.url} src={logo?.url} alt="Logo" />
+          <img {...logo?.$?.url} src={logo?.url} alt="Logo" />
         </Link>
       </div>
       <nav className={`nav ${isOpen ? "active" : ""}`}>
-        {navigation_links?.link.map((link: TLink, index: number) => (
+        {navigation_links?.link?.map((link: TLink, index: number) => (
           <Link
-            {...link.$.title}
+            {...link?.$?.title}
             key={`key-${index}`}
-            to={link.href}
-            className={location.pathname === link.href ? "active" : ""}
+            to={link?.href || ''}
+            className={location.pathname === link?.href ? "active" : ""}
             onClick={() => setIsOpen(false)}
           >
-            {link.title}
+            {link?.title}
           </Link>
         ))}
       </nav>

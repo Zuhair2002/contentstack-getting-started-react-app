@@ -24,12 +24,12 @@ const Menu: React.FC = () => {
   const memoizedMenuPageData = useMemo(() => menuPageData, [menuPageData]);
 
   const categories = memoizedMenuPageData?.map((course: TMenu) => course);
-  const dishes = memoizedMenuPageData?.map((course: TMenu) => course.dishes);
+  const dishes = memoizedMenuPageData?.map((course: TMenu) => course?.dishes);
   const flatDishes: TDishes[] = dishes
     ?.flat()
-    .filter(
-      (dish, index, self) => index === self.findIndex((d) => d.uid === dish.uid)
-    );
+    ?.filter(
+      (dish, index, self) => index === self.findIndex((d) => d?.uid === dish?.uid)
+    ) || [];
 
   const styleAlternateWords = (text: string) => {
     return text
@@ -68,12 +68,12 @@ const Menu: React.FC = () => {
               </p>
               {categories?.map((category, index) => (
                 <p
-                  {...category.$.course_name}
+                  {...category?.$?.course_name}
                   key={`cat-${index + 1}`}
                   className={activeIndex === index + 1 ? "active" : ""}
                   onClick={() => setActiveIndex(index + 1)}
                 >
-                  {category.course_name}
+                  {category?.course_name}
                 </p>
               ))}
             </div>
@@ -86,7 +86,7 @@ const Menu: React.FC = () => {
           {activeIndex === 0 ? (
             <MenuCard data={flatDishes} />
           ) : (
-            <MenuCard data={dishes[activeIndex - 1]} />
+            <MenuCard data={dishes?.[activeIndex - 1] || []} />
           )}
         </div>
       )}
