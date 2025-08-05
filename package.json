@@ -58,5 +58,9 @@
     "dompurify": "2.4.9",
     "postcss": "8.4.31"
   },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
   "license": "MIT"
 }
