@@ -118,6 +118,7 @@ export const initializeContentstackSdk = () => {
       apiKey: REACT_APP_CONTENTSTACK_API_KEY,
       environment: REACT_APP_CONTENTSTACK_ENVIRONMENT,
     },
+    ssr: false,
 
     mode: "builder",
     editButton: {
